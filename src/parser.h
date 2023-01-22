@@ -8,10 +8,14 @@
 
 class Parser {
 public:
-    explicit Parser(Lexer  lexer) : lexer_(std::move(lexer)) {}
+    explicit Parser(Lexer lexer) : lexer_(std::move(lexer)) {}
 
     int consume();
-    std::unique_ptr<AST::Node> error(const std::string& str);
+    static std::unique_ptr<AST::Node> error(const std::string& str);
+
+    std::unique_ptr<AST::Node> parseNumberExpression();
+    std::unique_ptr<AST::Node> parseParenExpression();
+    std::unique_ptr<AST::Node> parseIdentifierExpression();
 
 private:
     Lexer lexer_;
