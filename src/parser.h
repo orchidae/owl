@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <utility>
 
 #include "ast.h"
@@ -16,8 +17,19 @@ public:
     std::unique_ptr<AST::Node> parseNumberExpression();
     std::unique_ptr<AST::Node> parseParenExpression();
     std::unique_ptr<AST::Node> parseIdentifierExpression();
+    std::unique_ptr<AST::Node> parsePrimary();
+    std::unique_ptr<AST::Node> parseExpression();
 
 private:
+    int precedence(char token);
+
     Lexer lexer_;
     int current_token_ = 0;
+
+    std::map<char, int> precedence_map_ = {
+        {'<', 10},
+        {'+', 20},
+        {'-', 20},
+        {'*', 40}
+    };
 };
