@@ -12,7 +12,7 @@ find_package(llvm QUIET)
 if (NOT llvm_FOUND)
     # We use URL and not GIT_REPOSITORY because we dont want the full LLVM project
     FetchContent_Declare(llvm
-            URL https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-15.0.6.tar.gz)
+            URL https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-15.0.7.tar.gz)
     FetchContent_GetProperties(llvm)
     if (NOT llvm_POPULATED)
         set(FETCHCONTENT_QUIET NO)

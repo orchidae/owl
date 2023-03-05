@@ -9,19 +9,31 @@
 
 class Parser {
 public:
-    explicit Parser(Lexer lexer) : lexer_(std::move(lexer)) {}
+    explicit Parser() {}
 
-    int consume();
-    static std::unique_ptr<AST::Node> error(const std::string& str);
-
-    std::unique_ptr<AST::Node> parseNumberExpression();
-    std::unique_ptr<AST::Node> parseParenExpression();
-    std::unique_ptr<AST::Node> parseIdentifierExpression();
-    std::unique_ptr<AST::Node> parsePrimary();
-    std::unique_ptr<AST::Node> parseExpression();
+    void run();
 
 private:
-    int precedence(char token);
+    void handleDefinition();
+    void handleExtern();
+    void handleTopLevelExpression();
+
+    int consume();
+    int precedence(int token);
+    static std::unique_ptr<AST::Expression> error(const std::string& str);
+    static std::unique_ptr<AST::Prototype> errorP(const std::string& str);
+
+    std::unique_ptr<AST::Expression> parseNumberExpression();
+    std::unique_ptr<AST::Expression> parseParenExpression();
+    std::unique_ptr<AST::Expression> parseIdentifierExpression();
+    std::unique_ptr<AST::Expression> parsePrimary();
+    std::unique_ptr<AST::Expression> parseExpression();
+    std::unique_ptr<AST::Expression> parseBinOpRhs(int expPrecedence, std::unique_ptr<AST::Expression> lhs);
+    std::unique_ptr<AST::Prototype> parsePrototype();
+    std::unique_ptr<AST::Prototype> parseExternal();
+    std::unique_ptr<AST::Function> parseDefinition();
+    std::unique_ptr<AST::Function> parseTopLevelFunction();
+
 
     Lexer lexer_;
     int current_token_ = 0;

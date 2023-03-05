@@ -9,7 +9,7 @@ int Lexer::getToken() {
         if (std::isalpha(last_character_)) {
             identifier_.clear();
             do {
-                identifier_ += std::to_string(last_character_);
+                identifier_ += (char) last_character_;
                 last_character_ = std::getchar();
             } while (std::isalnum(last_character_));
 
@@ -24,7 +24,7 @@ int Lexer::getToken() {
         if (std::isdigit(last_character_) || last_character_ == '.') {
             std::string number_str;
             do {
-                number_str += std::to_string(last_character_);
+                number_str += (char) last_character_;
                 last_character_ = std::getchar();
             } while (std::isdigit(last_character_) || last_character_ == '.');
 

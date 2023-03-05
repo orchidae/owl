@@ -7,12 +7,9 @@
 
 namespace AST {
 
-class Node {
+class Expression {
 public:
-    virtual ~Node() = default;
-};
-
-class Expression : public Node {
+    virtual ~Expression() = default;
 };
 
 class Number : public Expression {
@@ -75,4 +72,4 @@ private:
     std::unique_ptr<Expression> body_;
 };
 
-} // namespace
+} // AST

@@ -1,5 +1,6 @@
-#include "lexer.h"
+#include "parser.h"
 
 int main() {
-    Lexer lexer;
+    Parser parser;
+    parser.run();
 }
